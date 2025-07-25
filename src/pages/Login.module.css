@@ -1,0 +1,5 @@
+/* Login.module.css */
+.formContainer {
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
