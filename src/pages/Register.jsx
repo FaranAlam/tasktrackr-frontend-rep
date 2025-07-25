@@ -21,7 +21,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register`, form); 
+const register = await api.post("/api/auth/register", form);
       localStorage.setItem("token", res.data.token);
       toast.success("Registration successful, redirecting...");
       setTimeout(() => navigate("/dashboard"), 1000);

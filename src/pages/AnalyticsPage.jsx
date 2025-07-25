@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../utils/api";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -59,38 +59,44 @@ const AnalyticsPage = () => {
     countTaskStatus(filteredTasks);
   }, [tasks, selectedTeam, selectedUser, startDate, endDate]);
 
-  const fetchTasks = async () => {
-    try {
-      const res = await axios.get("/api/tasks", {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      });
-      setTasks(res.data);
-    } catch (err) {
-      console.error("Failed to fetch tasks", err);
-    }
-  };
+const fetchTasks = async () => {
+  try {
+    const res = await api.get("/api/tasks", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    setTasks(res.data);
+  } catch (err) {
+    console.error("Failed to fetch tasks", err);
+  }
+};
 
-  const fetchTeams = async () => {
-    try {
-      const res = await axios.get("/api/teams", {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      });
-      setTeams(res.data);
-    } catch (err) {
-      console.error("Failed to fetch teams", err);
-    }
-  };
+const fetchTeams = async () => {
+  try {
+    const res = await api.get("/api/teams", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    setTeams(res.data);
+  } catch (err) {
+    console.error("Failed to fetch teams", err);
+  }
+};
 
-  const fetchUsers = async () => {
-    try {
-      const res = await axios.get("/api/users", {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      });
-      setUsers(res.data);
-    } catch (err) {
-      console.error("Failed to fetch users", err);
-    }
-  };
+const fetchUsers = async () => {
+  try {
+    const res = await api.get("/api/users", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    setUsers(res.data);
+  } catch (err) {
+    console.error("Failed to fetch users", err);
+  }
+};
 
   const countTaskStatus = (taskList) => {
     const counts = { Pending: 0, "In Progress": 0, Completed: 0 };

@@ -20,11 +20,7 @@ const TaskPage = () => {
     }
 
     try {
-      const res = await axios.get("/api/tasks/my", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await api.get("/api/tasks/my");
       setTasks(res.data);
     } catch (err) {
       console.error("Failed to fetch tasks", err.response?.data || err.message);

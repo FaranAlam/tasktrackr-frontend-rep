@@ -17,7 +17,8 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, form); localStorage.setItem("token", res.data.token);
+const login = await api.post("/api/auth/login", form);
+      localStorage.setItem("token", res.data.token);
       toast.success("Login successful");
       setTimeout(() => {
         navigate("/dashboard");
@@ -33,11 +34,11 @@ const Login = () => {
         onSubmit={handleSubmit}
         className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-sm border border-gray-200"
       >
-        <img
+        {/* <img
           src="./public/logo.jpg"
           alt="logo"
           className="w-20 h-20 rounded-full object-cover mx-auto mb-4"
-        />
+        /> */}
         <h2 className="text-2xl font-bold text-center text-blue-600 mb-6">Login to TaskTrackr</h2>
 
         {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}

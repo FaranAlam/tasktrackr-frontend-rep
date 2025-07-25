@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { toast } from "react-toastify";
+import api from "../utils/api"; // ✅ use this instead of axios directly
 import TeamCard from "../components/TeamCard";
 
 const TeamPage = () => {
@@ -14,11 +14,7 @@ const TeamPage = () => {
 
   const fetchTeams = async () => {
     try {
-      const res = await axios.get("/api/teams", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const res = await api.get("/api/teams");
       setTeams(res.data);
     } catch (err) {
       console.error("Failed to fetch teams", err);
@@ -29,15 +25,7 @@ const TeamPage = () => {
   const createTeam = async () => {
     if (!newTeam.trim()) return toast.error("Enter a valid team name");
     try {
-      await axios.post(
-        "/api/teams",
-        { name: newTeam.trim() },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      await api.post("/api/teams", { name: newTeam.trim() });
       toast.success("Team created successfully!");
       setNewTeam("");
       fetchTeams();
@@ -50,15 +38,7 @@ const TeamPage = () => {
   const joinTeam = async () => {
     if (!joinedTeamId.trim()) return toast.error("Enter a valid Team ID");
     try {
-      await axios.post(
-        "/api/teams/join",
-        { teamId: joinedTeamId.trim() },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      await api.post("/api/teams/join", { teamId: joinedTeamId.trim() });
       toast.success("Joined team successfully!");
       setJoinedTeamId("");
       fetchTeams();
