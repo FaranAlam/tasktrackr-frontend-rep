@@ -1,6 +1,6 @@
 // src/pages/Login.jsx
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../utils/api"; // Adjust path if needed
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,7 +17,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-const login = await api.post("/api/auth/login", form);
+      const res = await api.post("/api/auth/login", form);
       localStorage.setItem("token", res.data.token);
       toast.success("Login successful");
       setTimeout(() => {

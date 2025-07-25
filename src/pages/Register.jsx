@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../utils/api"; // Adjust path if needed
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -21,7 +21,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-const register = await api.post("/api/auth/register", form);
+      const res = await api.post("/api/auth/register", form);
       localStorage.setItem("token", res.data.token);
       toast.success("Registration successful, redirecting...");
       setTimeout(() => navigate("/dashboard"), 1000);
