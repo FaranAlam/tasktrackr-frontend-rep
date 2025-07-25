@@ -20,7 +20,7 @@ const TaskPage = () => {
     }
 
     try {
-      const res = await axios.get("http://localhost:5000/api/tasks/my", {
+      const res = await axios.get("/api/tasks/my", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
