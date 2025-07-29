@@ -21,8 +21,18 @@ const TaskPage = () => {
 
     try {
       const res = await api.get("/api/tasks/my");
-      console.log("Tasks fetched:", res.data); // ✅ Debug log
-      setTasks(Array.isArray(res.data) ? res.data : []);
+
+      console.log("API /api/tasks/my response:", res.data); // 🧪 Add this
+
+      // Make sure it's an array before calling map
+      if (Array.isArray(res.data)) {
+        setTasks(res.data);
+      } else if (res.data.tasks && Array.isArray(res.data.tasks)) {
+        setTasks(res.data.tasks); // in case backend sends { tasks: [...] }
+      } else {
+        console.warn("Unexpected response format:", res.data);
+        setTasks([]); // fallback to empty array
+      }
     } catch (err) {
       console.error("Failed to fetch tasks", err.response?.data || err.message);
       toast.error("Failed to fetch tasks. Please try again.");
