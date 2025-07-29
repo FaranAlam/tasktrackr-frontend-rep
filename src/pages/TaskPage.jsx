@@ -113,14 +113,17 @@ const TaskPage = () => {
       </div>
 
       <div className="grid gap-4">
-        {Array.isArray(filteredTasks) && filteredTasks.length > 0 ? (
-          filteredTasks.map((task) => (
-            <TaskCard key={task._id} task={task} onUpdate={fetchTasks} />
-          ))
+        {Array.isArray(filteredTasks) ? (
+          filteredTasks.length > 0 ? (
+            filteredTasks.map((task) => (
+              <TaskCard key={task._id} task={task} onUpdate={fetchTasks} />
+            ))
+          ) : (
+            <p className="text-gray-500">No tasks found.</p>
+          )
         ) : (
-          <p className="text-gray-500">No tasks found.</p>
+          <p className="text-red-500">Error loading tasks.</p>
         )}
-
       </div>
     </div>
   );
