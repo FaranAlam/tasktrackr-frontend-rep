@@ -65,7 +65,7 @@ const TaskPage = () => {
       } else if (res.data.data && Array.isArray(res.data.data)) {
         fetchedTasks = res.data.data;
       } else {
-        console.warn("⚠️ Unexpected format:", res.data);
+        console.warn("Unexpected format:", res.data);
         toast.error("Unexpected response format from server.");
         fetchedTasks = [];
       }
@@ -113,7 +113,7 @@ const TaskPage = () => {
       </div>
 
       <div className="grid gap-4">
-        {Array.isArray(filteredTasks) ? (
+        {/* {Array.isArray(filteredTasks) ? (
           filteredTasks.length > 0 ? (
             filteredTasks.map((task) => (
               <TaskCard key={task._id} task={task} onUpdate={fetchTasks} />
@@ -123,7 +123,7 @@ const TaskPage = () => {
           )
         ) : (
           <p className="text-red-500">Error loading tasks.</p>
-        )}
+        )} */}
       </div>
     </div>
   );
