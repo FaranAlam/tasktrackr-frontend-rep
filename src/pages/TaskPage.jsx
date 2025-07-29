@@ -78,9 +78,9 @@ const TaskPage = () => {
     setFilter(e.target.value);
   };
 
-  const filteredTasks = tasks.filter((task) =>
-    filter === "all" ? true : task.status === filter
-  );
+  const filteredTasks = Array.isArray(tasks)
+    ? tasks.filter((task) => (filter === "all" ? true : task.status === filter))
+    : [];
 
   useEffect(() => {
     fetchTasks();
