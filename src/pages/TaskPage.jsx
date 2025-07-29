@@ -54,7 +54,7 @@ const TaskPage = () => {
     try {
       const res = await api.get("/api/tasks/my");
 
-      console.log("API /api/tasks/my response:", res.data);
+      console.log("🧪 API /api/tasks/my response:", JSON.stringify(res.data, null, 2));
 
       let fetchedTasks = [];
 
@@ -62,7 +62,14 @@ const TaskPage = () => {
         fetchedTasks = res.data;
       } else if (res.data.tasks && Array.isArray(res.data.tasks)) {
         fetchedTasks = res.data.tasks;
+      } else if (res.data.data && Array.isArray(res.data.data)) {
+        fetchedTasks = res.data.data;
+      } else {
+        console.warn("⚠️ Unexpected format:", res.data);
+        toast.error("Unexpected response format from server.");
+        fetchedTasks = [];
       }
+
 
       setTasks(fetchedTasks);
     } catch (err) {
