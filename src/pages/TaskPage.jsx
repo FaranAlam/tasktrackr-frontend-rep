@@ -21,7 +21,8 @@ const TaskPage = () => {
 
     try {
       const res = await api.get("/api/tasks/my");
-      setTasks(res.data);
+      console.log("Tasks fetched:", res.data); // ✅ Debug log
+      setTasks(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
       console.error("Failed to fetch tasks", err.response?.data || err.message);
       toast.error("Failed to fetch tasks. Please try again.");
