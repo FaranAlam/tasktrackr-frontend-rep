@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../utils/api"; // ✅ use this instead of axios directly
 import TaskCard from "../components/TaskCard";
 import CreateTaskForm from "../components/CreateTaskForm";
 import { toast } from "react-toastify";
@@ -21,7 +21,8 @@ const TaskPage = () => {
 
     try {
       const res = await api.get("/api/tasks/my");
-      setTasks(res.data);
+      console.log("Tasks fetched:", res.data); // ✅ Debug log
+      setTasks(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
       console.error("Failed to fetch tasks", err.response?.data || err.message);
       toast.error("Failed to fetch tasks. Please try again.");
