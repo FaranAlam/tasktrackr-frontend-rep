@@ -106,13 +106,14 @@ const TaskPage = () => {
       </div>
 
       <div className="grid gap-4">
-        {filteredTasks.length > 0 ? (
+        {Array.isArray(filteredTasks) && filteredTasks.length > 0 ? (
           filteredTasks.map((task) => (
             <TaskCard key={task._id} task={task} onUpdate={fetchTasks} />
           ))
         ) : (
           <p className="text-gray-500">No tasks found.</p>
         )}
+
       </div>
     </div>
   );
